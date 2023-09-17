@@ -4,7 +4,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from flask import Flask, render_template, request, jsonify
-import joblib
+
 
 # Load NLTK data
 nltk.download('punkt')
@@ -42,7 +42,6 @@ def transform_text(text):
 with open('vectorizer2.pkl', 'rb') as vectorizer_file:
     tfidf = pickle.load(vectorizer_file)
 
-# Load Pre-trained MultinomialNB Model
 with open('model2.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
