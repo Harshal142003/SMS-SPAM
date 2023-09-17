@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email/SMS Spam Classifier</title>
+    <link rel="stylesheet" href="static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Email/SMS Spam Classifier</h1>
+      <form id="predict-form">
+        <textarea
+          id="message"
+          rows="4"
+          cols="50"
+          placeholder="Enter the message"
+        ></textarea
+        ><br />
+        <input type="submit" />
+      </form>
+      <br /><br />
+      <div id="result-container">
+        {% if result %}
+
+        <p>{{ result }}</p>
+        {% endif %}
+      </div>
+      <br /><br /><br />
+      <h3>Spam Example:</h3>
+      <p>
+        Congratulations! You've won a free vacation to an exotic island. Click
+        here to claim your prize now!
+      </p>
+      <h3>Not Spam Example:</h3>
+      <p>
+        Hi there, I hope you're doing well. Let's catch up sometime soon. Have a
+        great day!
+      </p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+      $(document).ready(function () {
+        $("#predict-form").submit(function (event) {
+          event.preventDefault();
+          var message = document.getElementById("message").value;
+          $.ajax({
+            type: "POST",
+            url: "/",
+            data: {
+              message: message,
+            },
+            success: function (response) {
+              $("#result-container").html(response.result);
+            },
+            error: function (error) {
+              console.error("Error:", error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
