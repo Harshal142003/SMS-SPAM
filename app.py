@@ -6,7 +6,7 @@ from nltk.stem.porter import PorterStemmer
 from flask import Flask, render_template, request, jsonify
 
 
-# Load NLTK data
+# Load NLTK
 nltk.download('punkt')
 nltk.download('stopwords')
 
